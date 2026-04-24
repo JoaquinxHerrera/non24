@@ -1,0 +1,849 @@
+<!DOCTYPE html><!--  This site was created in Webflow. https://webflow.com  --><!--  Last Published: Fri Apr 24 2026 11:19:40 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="67d17a20a5b30843e63c7f33" data-wf-site="67b886062767985472c3cfc3" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Survey-form</title>
+  <meta content="Survey-form" property="og:title">
+  <meta content="Survey-form" property="twitter:title">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/non-24.webflow.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Manrope:300,400,500,600,700"]  }});</script>
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="images/favicon.svg" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+  <script>
+<!-- ✅ Mixpanel Initialization Script con SRI -->
+(function() {
+    var mixpanelToken;
+    var hostname = window.location.hostname;
+    if (hostname === 'www.whyamiup.com') {
+        mixpanelToken = '8b63f1ac2704f20972d113c9b6f9cc93'; // Production token
+    } else {
+        mixpanelToken = '9723710e99ab2039e07ade8edadd42cc'; // Development token
+    }
+    (function(f, b) {
+        if (!b.__SV) {
+            var a, e, i, g;
+            window.mixpanel = b;
+            b._i = [];
+            b.init = function(a, e, d) {
+                function f(b, h) {
+                    var a = h.split('.');
+                    2 == a.length && (b = b[a[0]], h = a[1]);
+                    b[h] = function() {
+                        b.push([h].concat(Array.prototype.slice.call(arguments, 0)));
+                    };
+                }
+                var c = b;
+                "undefined" !== typeof d ? c = b[d] = [] : d = "mixpanel";
+                c.people = c.people || [];
+                c.toString = function(b) {
+                    var a = "mixpanel";
+                    "mixpanel" !== d && (a += "." + d);
+                    b || (a += " (stub)");
+                    return a;
+                };
+                c.people.toString = function() {
+                    return c.toString(1) + ".people (stub)";
+                };
+                i = "disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+                for (g = 0; g < i.length; g++) f(c, i[g]); b._i.push([a, e, d]); }; b.__SV=1.2; a=f.createElement("script"); a.type="text/javascript" ; a.async=!0; a.src="https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" ; a.integrity="sha384-L23ipoqaDbGP4F9SWcImMoGOBFXkwAZ+sToWV04eXcH5DZDSXRiVg4dzHXfxkeeM" ; a.crossOrigin="anonymous" ; e=f.getElementsByTagName("script")[0]; e.parentNode.insertBefore(a, e); } })(document, window.mixpanel || []); mixpanel.init(mixpanelToken); })(); </script>
+    <!--  Google tag (gtag.js)  -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=GT-M3S2KNLW"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GT-M3S2KNLW');
+</script>
+    <style>
+/* Ejemplo básico de estilos para un botón deshabilitado */
+.continue-button.disabled-button {
+    opacity: 0.5; /* Hace que el botón se vea semitransparente */
+    cursor: not-allowed; /* Cambia el cursor para indicar que no es clickeable */
+    pointer-events: none; /* Crucial: evita que el botón sea clickeable incluso si el CSS de cursor falla */
+}
+.radio-error-message {
+    color: red !important; /* Fuerza el color rojo */
+    font-size: 14px !important; /* Fuerza el tamaño */
+}
+.form-message-display-area {
+    padding: 8px 12px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-family: "manrope", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    opacity: 0; /* Inicialmente transparente para fade-in/out */
+    transition: opacity 0.5s ease-in-out; /* Transición suave */
+    display: none; /* Oculto por defecto */
+    color: #ffffff; /* Color de texto blanco por defecto */
+}
+/* Estilo para mensajes de error (fondo rojo como en la imagen) */
+.form-message-error {
+    background-color: #6C1837; /* Rojo vibrante */
+    opacity: 1;
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.2);
+}
+.form-message-success {
+    background-color: #28a745; /* Verde */
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+}
+</style>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LckI2ArAAAAAFRgyhUVp4D9UEUbuGQILZe5b-3s"></script>
+</head>
+<body lang="en-US">
+  <header class="header gap-y-16-5 space-between px-172 center bg-blue">
+    <div class="w-layout-blockcontainer flex space-between mx-5 w-container">
+      <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" data-doc-height="1" role="banner" class="navbar-2 w-nav">
+        <div class="navbar-wrapper-2">
+          <a data-tracker="Navigation Click|Home (Header Simple)" href="home.html" class="navbar-brand w-nav-brand"><img loading="lazy" src="images/non24-logo.svg" alt="Non-24 logo" class="image-84"></a>
+          <aside role="navigation" class="nav-menu-wrapper w-nav-menu">
+            <ul role="list" class="nav-menu none w-list-unstyled">
+              <li class="list-item">
+                <a href="about.html" class="link-block-4 w-inline-block">
+                  <div class="menu-dropdown-text text-white">About Non-24</div>
+                </a>
+              </li>
+              <li class="list-item">
+                <a href="treatment.html" class="link-block-4 w-inline-block">
+                  <div class="menu-dropdown-text text-white">Treatment</div>
+                </a>
+              </li>
+              <li class="list-item">
+                <a href="support.html" class="link-block-4 w-inline-block">
+                  <div class="menu-dropdown-text text-white">Support</div>
+                </a>
+              </li>
+            </ul>
+          </aside>
+          <a href="survey.html" class="button white relative z-index-1 none w-inline-block">
+            <div class="small semibold">Get Screened Now</div>
+          </a>
+          <div class="menu-button w-nav-button"><img loading="lazy" src="images/burger-menu.svg" alt="burger menu" class="image-96"></div>
+          <div class="menu-button cross w-nav-button"><img loading="lazy" src="images/Cross-white_1Cross-white.png" alt="" class="image-95"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="section form survey-bg h-100 center px-5">
+    <div class="w-layout-blockcontainer container h-100 w-container">
+      <div class="mx-auto _w-100 flex-center">
+        <div class="form-container h-100 w-form">
+          <form id="wf-form-email" name="wf-form-email" data-name="email" method="post" class="form center _w-100 h-100" data-wf-page-id="67d17a20a5b30843e63c7f33" data-wf-element-id="d6e7b8fd-c953-dc52-ee1a-c4f9b6a85438">
+            <div class="form-step navbar-icon-container">
+              <div class="flex space-between">
+                <div class="medium small success-700">Tell Us About Yourself</div>
+                <div class="medium small success-700"><span class="actual-question">1</span>/5</div>
+              </div>
+              <div class="heading-6 mt-71 mb-36 mobile-heading8">Are you 18 or older?</div><label data-tracker="Option clicked|Question 1 Yes (initial)" data-w-id="f72b9c68-317d-3dc3-c8f0-5aa58d1f5ac3" class="radio-button-field border-bottom w-radio">
+                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="question1" id="yes" data-name="question1" required="" style="opacity:0;position:absolute;z-index:-1" value="yes"><span data-w-id="f72b9c68-317d-3dc3-c8f0-5aa58d1f5ac6" class="medium regular text-white w-form-label" for="yes">Yes</span>
+              </label><label data-tracker="Option clicked|Question 1 No (initial)" data-w-id="f72b9c68-317d-3dc3-c8f0-5aa58d1f5ac8" class="radio-button-field w-radio">
+                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="question1" id="no" data-name="question1" required="" style="opacity:0;position:absolute;z-index:-1" value="no"><span data-w-id="f72b9c68-317d-3dc3-c8f0-5aa58d1f5acb" class="medium regular text-white w-form-label" for="no">No</span>
+              </label>
+              <div class="flex align-right mt-10">
+                <div data-tracker="Form Navigation|Continue Button 1 (initial)" class="button white continue-button">
+                  <div class="semibold">Continue</div><img loading="lazy" src="images/arrow-right-black.svg" alt="">
+                </div>
+              </div>
+              <div id="form-message-display" class="form-message-display-area"></div>
+            </div>
+            <div class="form-step button-icon-wrapper none">
+              <div class="flex space-between">
+                <div class="medium small success-700">Tell us about yourself</div>
+                <div class="medium small success-700"><span class="actual-question">2</span>/5</div>
+              </div>
+              <div class="heading-6 mt-71 mb-36 mobile-heading8">Do you sometimes feel sleepy during the day?</div><label data-tracker="Option clicked|Question 2 Yes (initial)" data-w-id="6e0c0b45-32c9-1580-6605-0c2abe5639bf" class="radio-button-field border-bottom w-radio">
+                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="question2" id="yes" data-name="question2" required="" style="opacity:0;position:absolute;z-index:-1" value="yes"><span data-w-id="6e0c0b45-32c9-1580-6605-0c2abe5639c2" class="medium regular text-white w-form-label" for="yes">Yes</span>
+              </label><label data-tracker="Option clicked|Question 2 No (initial)" data-w-id="6e0c0b45-32c9-1580-6605-0c2abe5639c4" class="radio-button-field w-radio">
+                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="question2" id="no" data-name="question2" required="" style="opacity:0;position:absolute;z-index:-1" value="no"><span data-w-id="6e0c0b45-32c9-1580-6605-0c2abe5639c7" class="medium regular text-white w-form-label" for="no">No</span>
+              </label>
+              <div class="flex space-between mt-10">
+                <div class="flex space-between mobile-col gap-y-15 mt-10">
+                  <div data-tracker="Form Navigation|Go Back Button 2 (initial)" class="button transparent go-back"><img loading="lazy" src="images/arrow-white.svg" alt="" class="button-img">
+                    <div class="semibold small text-white">Go Back</div>
+                  </div>
+                  <div data-tracker="Form Navigation|Continue Button 2 (initial)" class="button white continue-button">
+                    <div class="semibold">Continue</div><img loading="lazy" src="images/arrow-right-black.svg" alt="">
+                  </div>
+                </div>
+              </div>
+              <div id="form-message-display" class="form-message-display-area"></div>
+            </div>
+            <div class="form-step none">
+              <div class="flex space-between">
+                <div class="medium small success-700">Tell us about yourself</div>
+                <div class="medium small success-700"><span class="actual-question">3</span>/5</div>
+              </div>
+              <div class="heading-6 mt-71 mb-36 mobile-heading8">Do you ever have trouble falling asleep when you want to?</div><label data-tracker="Option clicked|Question 3 Yes (initial)" data-w-id="cfa3cc10-6ced-08f4-dc29-bb0e5dfab901" class="radio-button-field border-bottom w-radio">
+                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="question3" id="yes" data-name="question3" required="" style="opacity:0;position:absolute;z-index:-1" value="yes"><span data-w-id="cfa3cc10-6ced-08f4-dc29-bb0e5dfab904" class="medium regular text-white w-form-label" for="yes">Yes</span>
+              </label><label data-tracker="Option clicked|Question 3 No (initial)" data-w-id="cfa3cc10-6ced-08f4-dc29-bb0e5dfab906" class="radio-button-field w-radio">
+                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="question3" id="no" data-name="question3" style="opacity:0;position:absolute;z-index:-1" value="no"><span data-w-id="cfa3cc10-6ced-08f4-dc29-bb0e5dfab909" class="medium regular text-white w-form-label" for="no">No</span>
+              </label>
+              <div class="flex space-between mt-10">
+                <div class="flex space-between mobile-col mt-71 gap-y-15 mt-10">
+                  <div data-tracker="Form Navigation|Go Back Button 3 (initial)" class="button transparent go-back"><img loading="lazy" src="images/arrow-white.svg" alt="" class="button-img">
+                    <div class="semibold small text-white">Go Back</div>
+                  </div>
+                  <div data-tracker="Form Navigation|Continue Button 3 (initial)" class="button white continue-button">
+                    <div class="semibold">Continue</div><img loading="lazy" src="images/arrow-right-black.svg" alt="">
+                  </div>
+                </div>
+              </div>
+              <div id="form-message-display" class="form-message-display-area"></div>
+            </div>
+            <div class="form-step h-100 none">
+              <div class="flex space-between">
+                <div class="medium small success-700">Tell us about yourself</div>
+                <div class="medium small success-700"><span class="actual-question">4</span>/5</div>
+              </div>
+              <div class="heading-6 mt-71 mb-36 mobile-heading8">Are you covered by a commercial health insurance plan (such as UnitedHealth, Elevance Health, Aetna, or similar)?</div><label data-tracker="Option clicked|Question 4 Yes (initial)" data-w-id="de7b824e-315a-4ddb-508f-7167d2cd3472" class="radio-button-field border-bottom w-radio">
+                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="question4" id="yes" data-name="question4" required="" style="opacity:0;position:absolute;z-index:-1" value="yes"><span data-w-id="de7b824e-315a-4ddb-508f-7167d2cd3475" class="medium regular text-white w-form-label" for="yes">Yes</span>
+              </label><label data-tracker="Option clicked|Question 4 Government Sponsored(initial)" data-w-id="de7b824e-315a-4ddb-508f-7167d2cd3477" class="radio-button-field border-bottom w-radio">
+                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="question4" id="government" data-name="question4" required="" style="opacity:0;position:absolute;z-index:-1" value="government"><span data-w-id="de7b824e-315a-4ddb-508f-7167d2cd347a" class="medium regular text-white tablet-80 w-form-label" for="government">No, I&#x27;m covered by Medicare, Medicaid, or another government-sponsored healthcare plan</span>
+              </label><label data-tracker="Option clicked|Question 4 Uninsured(initial)" data-w-id="de7b824e-315a-4ddb-508f-7167d2cd347c" class="radio-button-field w-radio">
+                <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-button w-radio-input"></div><input type="radio" name="question4" id="no" data-name="question4" required="" style="opacity:0;position:absolute;z-index:-1" value="no"><span data-w-id="de7b824e-315a-4ddb-508f-7167d2cd347f" class="medium regular text-white w-form-label" for="no">No, I&#x27;m uninsured</span>
+              </label>
+              <div class="flex space-between mt-10">
+                <div class="flex space-between mobile-col mt-71 gap-y-15 mt-10">
+                  <div data-tracker="Form Navigation|Go Back Button 4 (initial)" class="button transparent go-back"><img loading="lazy" src="images/arrow-white.svg" alt="" class="button-img">
+                    <div class="semibold small text-white">Go Back</div>
+                  </div>
+                  <div data-tracker="Form Navigation|Continue Button 4 (initial)" class="button white continue-button">
+                    <div class="semibold">Continue</div><img loading="lazy" src="images/arrow-right-black.svg" alt="">
+                  </div>
+                </div>
+              </div>
+              <div id="form-message-display" class="form-message-display-area"></div>
+            </div>
+            <div class="form-step h-100">
+              <div class="flex space-between">
+                <div class="medium small success-700">Tell us about yourself</div>
+                <div class="medium small success-700"><span class="actual-question">5</span>/5</div>
+              </div>
+              <div class="heading-6 mt-71 mb-36 mobile-heading8">To help us continue your evaluation, please enter your contact information.</div>
+              <div class="small medium text-white mb-36">We’ll never sell your data. We collect this information only to help you continue where you left off.</div>
+              <div class="form-question">
+                <div class="flex gap-x-20 mobile-col">
+                  <div class="_w-50 mobile-w-100">
+                    <div class="survey-title">First Name</div><input class="survey-input _w-100 w-input" maxlength="256" name="FirstNameInitial" data-name="FirstNameInitial" placeholder="John" data-tracker="" type="text" id="first-name-initial" required="">
+                  </div>
+                  <div class="_w-50 mobile-w-100">
+                    <div class="survey-title">Last Name</div><input class="survey-input _w-100 w-input" maxlength="256" name="LastNameInitial" data-name="LastNameInitial" placeholder="Doe" data-tracker="" type="text" id="last-name-initial" required="">
+                  </div>
+                </div>
+              </div>
+              <div class="form-question">
+                <div class="survey-title">Email Address</div><input class="survey-input _w-100 w-input" maxlength="256" name="Email" data-name="Email" placeholder="JohnDoe@example.com" data-tracker="" type="email" id="Email-3" required="">
+              </div>
+              <div class="form-question"><label for="PhoneNumber" class="survey-title">Phone Number</label><input class="survey-input _w-100 w-input" maxlength="256" name="PhoneNumber" data-name="PhoneNumber" placeholder="(555) 123-4567" data-backend-id="683f191abf1e526904fe4939" type="tel" id="PhoneNumber" required="">
+                <div class="custom-error-message"><img src="images/form-error.svg" loading="lazy" alt="">
+                  <div class="medium tiny text-white error-text-content">Some required information is missing or entered incorrectly.</div>
+                </div>
+              </div>
+              <div class="flex space-between mt-10">
+                <div class="flex space-between mobile-col gap-y-15 mt-10">
+                  <div data-tracker="Form Navigation|Go Back Button 5 (initial)" class="button transparent go-back"><img loading="lazy" src="images/arrow-white.svg" alt="" class="button-img">
+                    <div class="semibold small text-white">Go Back</div>
+                  </div>
+                  <div data-tracker="Form Navigation|Continue Button 5 (initial)" class="button white continue-button">
+                    <div class="semibold">Continue</div><img loading="lazy" src="images/arrow-right-black.svg" alt="">
+                  </div>
+                </div>
+              </div>
+              <div id="form-message-display" class="form-message-display-area"></div>
+            </div>
+          </form>
+          <div aria-live="polite" class="success-message-2 w-form-done">
+            <div class="_w-100 mb-48">
+              <h1 class="heading-6 mb-16 align-left">You&#x27;re Eligible for Medical Treatment</h1>
+              <div class="normal regular text-white">Complete the form below for a virtual consult with Wheel Health.</div>
+            </div>
+            <div class="flex gap-x-25 mb-48">
+              <div class="_w-50">
+                <div>
+                  <div class="semibold _16px text-white align-left mb-8">Name</div>
+                </div>
+                <div class="empty-form-input"></div>
+              </div>
+              <div class="_w-50">
+                <div>
+                  <div class="semibold _16px text-white align-left mb-8">Email</div>
+                </div>
+                <div class="empty-form-input"></div>
+              </div>
+            </div>
+            <div class="div-block-2">
+              <a href="#" class="button success-form _w-100 py-14 w-inline-block"><img src="images/tick-white.svg" loading="lazy" alt="white tick icon">
+                <div class="semibold small _16px text-white">Received!</div>
+              </a>
+            </div>
+          </div>
+          <div aria-live="assertive" class="_w-form-fail w-form-fail">
+            <div>Oops! Something went wrong while submitting the form.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=67b886062767985472c3cfc3" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <script>
+// Track page views
+document.addEventListener('DOMContentLoaded', function() {
+    var previousPage = document.referrer;
+    function trackPageView() {
+        var currentPage = window.location.pathname;
+        var pageName = document.title;
+        mixpanel.track('Page Viewed', {
+            'Page Name': pageName,
+            'Previous Page Name': previousPage
+        });
+        previousPage = currentPage;
+    }
+    trackPageView();
+    window.addEventListener('popstate', trackPageView);
+});
+</script>
+  <script>
+// Track clicks with data-tracker attribute
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-tracker]').forEach(function(element) {
+        element.addEventListener('click', function() {
+            var trackData = element.getAttribute('data-tracker');
+            if (!trackData) return;
+            var parts = trackData.split('|');
+            if (parts.length !== 2) return;
+            var action = parts[0];
+            var label = parts[1];
+            mixpanel.track(action, { label: label });
+        });
+    });
+});
+</script>
+  <script>
+// Constantes Globales del Formulario
+const BIM = {"Name":"683f191abf1e526904fe4937","Email":"683f191abf1e526904fe493a","DateOfBirth":"683f191abf1e526904fe4938","PhoneNumber":"683f191abf1e526904fe4939","State_of_Residence":"683f191abf1e526904fe493b","ZipCode":"683f191abf1e526904fe493c","Are-you-totally-blind-i.e.-do-you-have-no-light-perception":"683f191abf1e526904fe493e","whenBlindnessBegan":"683f191abf1e526904fe493f","whenBlindnessBegan-Age":"683f191abf1e526904fe4940","Have_you_been_diagnosed_with_Non-24-Hour_Sleep-Wake_Disorder":"683f191abf1e526904fe4941","Have_you_been_diagnosed_with_Non-24-Hour_Sleep-Wake_Disorder-_who_when":"683f191abf1e526904fe4942","Do-your-sleep-and-wake-times-shift-later-each-day-e.g.-later-bedtime-daily":"683f191abf1e526904fe4943","Do-you-struggle-to-maintain-a-24-hour-sleep-schedule-even-with-structure":"683f191abf1e526904fe4944","On-average-what-time-do-you-fall-asleep":"683f191abf1e526904fe4945","On-average-what-time-do-you-wake-up":"683f191abf1e526904fe4946","Do_you_take_naps_during_the_day":"683f191abf1e526904fe4947","Do_you_take_naps_during_the_day-_often_long":"683f191abf1e526904fe4948","How-many-total-hours-of-sleep-do-you-get-in-a-24-hour-period":"683f191abf1e526904fe4949","How-does-your-sleep-pattern-affect-your-ability-to-work-attend-school-or-engage-socially":"683f191abf1e526904fe494a","Have-you-taken-Tasimelteon-known-under_the-brand-name-Hetlioz-in_the-past":"683f191abf1e526904fe494d","Are_you_currently_using_any_medications_for_sleep_or_circadian_rhythm_management":"683f191abf1e526904fe494e","Are_you_currently_taking_fluvoxamine_fluoxetine_paroxetine_or_similar_antidepressants":"683f191abf1e526904fe494f","Are_you_currently_taking_fluvoxamine_fluoxetine_paroxetine_or_similar_antidepressants_list":"683f191abf1e526904fe4950","Are_you_taking_rifampin_phenytoin_carbamazepine_or_other_enzyme-inducing_drugs":"683f191abf1e526904fe4951","Are_you_taking_rifampin_phenytoin_carbamazepine_or_other_enzyme-inducing_drugs_list":"683f191abf1e526904fe4952","Are_you_taking_antifungals_like_ketoconazole_itraconazole_or_clarithromycin":"683f191abf1e526904fe4953","Are_you_taking_antifungals_like_ketoconazole_itraconazole_or_clarithromycin_list":"683f191abf1e526904fe4954","Do_you_currently_smoke_or_use_tobacco_products":"683f191abf1e526904fe4955","Do-you-have-any-history-of-liver-disease-or-hepatic-impairment":"683f191abf1e526904fe4956","Are-you-currently-pregnant-planning-pregnancy-or-breastfeeding":"683f191abf1e526904fe4957","Have_you_seen_a_sleep_specialist_before":"683f191abf1e526904fe4958","Is-there-anything-else-about-your-sleep-history-or_health-the-doctor-should-know":"683f191abf1e526904fe4959","Details-of-insurance-Group":"group","Details-Of-Insurance-BIN":"bin","Details-Of-Insurance-PCN":"pcn","Details-Of-Insurance-ID-Number":"id", "Height": "bf4d71fad7d2d5a3981399d6", "Weight": "6bb1c839db80ae61d5306363", "ExerciseFrequency": "f670524cc9adb3553dc852f8", "Address": "sud822kfbdjfn3553dc852f8", "Gender": "f028sskfbdjfn3553dc852f8"/****/};
+const CQC = {"683f191abf1e526904fe494b":{radioName:"Have_you_tried_light_therapy_structured_routines_or_behavior-based_treatments_before",detailInputName:"Have_you_tried_light_therapy_structured_routines_or_behavior-based_treatments_before_describe"},"683f191abf1e526904fe494c":{radioName:"Have_you_used_tools_to_regulate_sleep_eg_melatonin_Ambien_trazodone",detailInputName:"Have_you_used_tools_to_regulate_sleep_eg_melatonin_Ambien_trazodone_list_them"},"683f191abf1e526904fe494e":{radioName:"Are_you_currently_using_any_medications_for_sleep_or_circadian_rhythm_management",detailInputName:"Are_you_currently_using_any_medications_for_sleep_or_circadian_rhythm_management-_list"},"683f191abf1e526904fe4955":{radioName:"Do_you_currently_smoke_or_use_tobacco_products",detailInputName:"Do_you_currently_smoke_or_use_tobacco_products-_often"},"683f191abf1e526904fe4958":{radioName:"Have_you_seen_a_sleep_specialist_before",detailInputName:"Have_you_seen_a_sleep_specialist_before-_describe"}};
+const OFK = ["683f191abf1e526904fe4937","683f191abf1e526904fe4938","683f191abf1e526904fe4939","683f191abf1e526904fe493a","683f191abf1e526904fe493b","683f191abf1e526904fe493c","683f191abf1e526904fe493e","683f191abf1e526904fe493f","683f191abf1e526904fe4940","683f191abf1e526904fe4941","683f191abf1e526904fe4942","683f191abf1e526904fe4943","683f191abf1e526904fe4944","683f191abf1e526904fe4945","683f191abf1e526904fe4946","683f191abf1e526904fe4947","683f191abf1e526904fe4948","683f191abf1e526904fe4949","683f191abf1e526904fe494a","683f191abf1e526904fe494b","683f191abf1e526904fe494c","683f191abf1e526904fe494d","683f191abf1e526904fe494e","683f191abf1e526904fe494f","683f191abf1e526904fe4950","683f191abf1e526904fe4951","683f191abf1e526904fe4952","683f191abf1e526904fe4953","683f191abf1e526904fe4954","683f191abf1e526904fe4955","683f191abf1e526904fe4956","683f191abf1e526904fe4957","683f191abf1e526904fe4958","683f191abf1e526904fe4959", "bf4d71fad7d2d5a3981399d6", "6bb1c839db80ae61d5306363", "f670524cc9adb3553dc852f8", "sud822kfbdjfn3553dc852f8", "f028sskfbdjfn3553dc852f8"/****/];
+const USS = [{name:"Alabama",abbr:"AL"},{name:"Alaska",abbr:"AK"},{name:"Arizona",abbr:"AZ"},{name:"Arkansas",abbr:"AR"},{name:"California",abbr:"CA"},{name:"Colorado",abbr:"CO"},{name:"Connecticut",abbr:"CT"},{name:"Delaware",abbr:"DE"},{name:"Florida",abbr:"FL"},{name:"Georgia",abbr:"GA"},{name:"Hawaii",abbr:"HI"},{name:"Idaho",abbr:"ID"},{name:"Illinois",abbr:"IL"},{name:"Indiana",abbr:"IN"},{name:"Iowa",abbr:"IA"},{name:"Kansas",abbr:"KS"},{name:"Kentucky",abbr:"KY"},{name:"Louisiana",abbr:"LA"},{name:"Maine",abbr:"ME"},{name:"Maryland",abbr:"MD"},{name:"Massachusetts",abbr:"MA"},{name:"Michigan",abbr:"MI"},{name:"Minnesota",abbr:"MN"},{name:"Mississippi",abbr:"MS"},{name:"Missouri",abbr:"MO"},{name:"Montana",abbr:"MT"},{name:"Nebraska",abbr:"NE"},{name:"Nevada",abbr:"NV"},{name:"New Hampshire",abbr:"NH"},{name:"New Jersey",abbr:"NJ"},{name:"New Mexico",abbr:"NM"},{name:"New York",abbr:"NY"},{name:"North Carolina",abbr:"NC"},{name:"North Dakota",abbr:"ND"},{name:"Ohio",abbr:"OH"},{name:"Oklahoma",abbr:"OK"},{name:"Oregon",abbr:"OR"},{name:"Pennsylvania",abbr:"PA"},{name:"Rhode Island",abbr:"RI"},{name:"South Carolina",abbr:"SC"},{name:"South Dakota",abbr:"SD"},{name:"Tennessee",abbr:"TN"},{name:"Texas",abbr:"TX"},{name:"Utah",abbr:"UT"},{name:"Vermont",abbr:"VT"},{name:"Virginia",abbr:"VA"},{name:"Washington",abbr:"WA"},{name:"Washington, DC",abbr:"WADC"},{name:"West Virginia",abbr:"WV"},{name:"Wisconsin",abbr:"WI"},{name:"Wyoming",abbr:"WY"}];
+</script>
+  <script>
+console.log("DEBUG GLOBAL: Main script has loaded and is about to execute.");
+let currentStepIndex = 0;
+let formSteps = [];
+let hasPaidStep = false;
+const PAID_STEP_CLASS = 'step-para-pagados'; 
+// Claves para Desarrollo
+const DEV_API_BASE_URL = 'https://devcaryrx.ngrok.io/v1/telehealth';
+const DEV_X_API_KEY = "0e27fe99-08aa-4330-ad7e-c48fb993f1df";
+const DEV_X_PROVIDER_ID = "1c8f7621-d935-496f-8196-769e47981cd5";
+// Claves para Producción
+const PROD_API_BASE_URL = 'https://api5.caryrx.com/v1/telehealth';
+const PROD_X_API_KEY = "a6e3b158-0dc9-43a5-b0a9-16ae76f15e71";
+const PROD_X_PROVIDER_ID = "3f2fca47-1d87-4a12-97c4-7a3c25ec2b1d";
+// Variables que se asignarán dinámicamente
+let API_BASE_URL;
+let X_API_KEY;
+let X_PROVIDER_ID;
+// Lógica para determinar el entorno basado en el hostname
+const hostname = window.location.hostname;
+// Ajusta estas condiciones para que coincidan con tus dominios de Webflow
+if (hostname.includes('non-24.webflow.io')) { // Dominio de staging
+		API_BASE_URL = DEV_API_BASE_URL;
+    X_API_KEY = DEV_X_API_KEY;
+    X_PROVIDER_ID = DEV_X_PROVIDER_ID;
+    console.log("DEBUG: Usando configuración de DESARROLLO (Dominio:", hostname, ")");
+} else if (hostname.includes('www.whyamiup.com')) { // Dominio de producción real
+		API_BASE_URL = PROD_API_BASE_URL;
+    X_API_KEY = PROD_X_API_KEY;
+    X_PROVIDER_ID = PROD_X_PROVIDER_ID;
+    console.log("DEBUG: Usando configuración de PRODUCCIÓN (Dominio:", hostname, ")");
+} else {
+    // Fallback por si el dominio no coincide con ninguno (ej: localhost durante desarrollo local)
+		API_BASE_URL = DEV_API_BASE_URL;
+    X_API_KEY = DEV_X_API_KEY; // Por defecto, usa las claves de desarrollo
+    X_PROVIDER_ID = DEV_X_PROVIDER_ID;
+    console.warn("DEBUG: Dominio no reconocido, usando configuración por defecto (DESARROLLO). Dominio:", hostname);
+}
+const RECAPTCHA_SITE_KEY="6LckI2ArAAAAAFRgyhUVp4D9UEUbuGQILZe5b-3s";
+const backendIdMap = {
+    "Name": "683f191abf1e526904fe4937", 
+    "Email": "683f191abf1e526904fe493a",
+    "PhoneNumber": "683f191abf1e526904fe4939" 
+};
+let errorTimeoutMap = new Map(); 
+function showError(message, stepElement = null) {
+    let targetMessageDivs;
+    if (stepElement) {
+        const specificErrorContainer = stepElement.querySelector('.form-message-display-area');
+        if (specificErrorContainer) {
+            targetMessageDivs = [specificErrorContainer];
+        } else {
+            console.error("No specific '.form-message-display-area' found in the provided stepElement. Using global fallback.");
+            targetMessageDivs = document.querySelectorAll('.form-message-display-area'); 
+        }
+    } else {
+        targetMessageDivs = document.querySelectorAll('.form-message-display-area'); 
+    }
+    if (targetMessageDivs.length > 0) {
+        targetMessageDivs.forEach(messageDiv => {
+            const divId = messageDiv.id || 'global_error_message_area_' + Math.random().toString(36).substring(2, 9); 
+            if (!messageDiv.id) messageDiv.id = divId; 
+            messageDiv.textContent = message;
+            messageDiv.classList.remove('form-message-success'); 
+            messageDiv.classList.add('form-message-error');     
+            messageDiv.style.display = 'block';
+            messageDiv.style.opacity = '1';
+            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (errorTimeoutMap.has(divId)) {
+                clearTimeout(errorTimeoutMap.get(divId));
+                errorTimeoutMap.delete(divId);
+            }
+        });
+    } else {
+        console.error("No elements with class 'form-message-display-area' found to display the message:", message);
+        // Using a custom modal for alerts instead of alert()
+        // alert(message); 
+        // For demonstration, a simple console log if no display area is found
+        console.error("DISPLAY ERROR: " + message);
+    }
+}
+function toggleLoading(isLoading) {
+    const submitButtons = document.querySelectorAll('.continue-button');
+    submitButtons.forEach(button => {
+        if (isLoading) {
+            button.setAttribute('data-original-text', button.textContent);
+            button.textContent = 'Loading...';
+            button.disabled = true;
+            button.style.opacity = '0.5';
+            button.style.cursor = 'wait';
+        } else {
+            if (button.hasAttribute('data-original-text')) {
+                button.textContent = button.getAttribute('data-original-text');
+                button.removeAttribute('data-original-text');
+            }
+            button.disabled = false;
+            button.style.opacity = '1';
+            button.style.cursor = 'pointer';
+        }
+    });
+}
+async function callApi(endpoint, method = 'POST', body = null, errorDisplayElement = null) {
+    toggleLoading(true);
+    try {
+        const headers = {
+            'Content-Type': 'application/json',
+            'x-api-key': X_API_KEY,
+            'x-provider-id': X_PROVIDER_ID
+        };
+        let apiUrl = `${API_BASE_URL}${endpoint}`;
+        const config = { method: method, headers: headers };
+        if (method === 'GET' || method === 'HEAD') {
+            if (body) {
+                const queryParams = new URLSearchParams(body).toString();
+                apiUrl = `${apiUrl}?${queryParams}`;
+            }
+            delete config.headers['Content-Type'];
+        } else {
+            if (body) {
+                config.body = JSON.stringify(body);
+            }
+        }
+        const response = await fetch(apiUrl, config);
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message || `API call failed with status ${response.status}`);
+        }
+        return data;
+    } catch (error) {
+        const errorMessage = `Error: ${error.message || 'Something went wrong with the API call. Please try again.'}`;
+        showError(errorMessage, errorDisplayElement);
+        throw error;
+    } finally {
+        toggleLoading(false);
+    }
+}
+async function handlePaymentFlow(paymentType, submissionId) {
+    if (window.location.hostname.includes('non-24.webflow.io') && paymentType === "government"){
+    	  console.log(`handlePaymentFlow: Payment type is ${paymentType}. Redirecting to payment.`);
+        window.location.href = `/make-payment?submission_id=${submissionId}`;
+		}
+    else if (paymentType === "government" || paymentType === "insurance" || paymentType === "uninsured") {
+        console.log(`handlePaymentFlow: Payment type is ${paymentType}. Redirecting to questionnaire.`);
+        window.location.href = `/take-a-questionnaire?submission_id=${submissionId}`;
+    } else {
+        console.log("handlePaymentFlow: Payment type is UNRECOGNIZED. Redirecting to questionnaire.");
+        window.location.href = `/take-a-questionnaire?submission_id=${submissionId}`;
+    }
+}
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("DEBUG DOM: DOMContentLoaded event fired.");
+    const form = document.getElementById("wf-form-email");
+    if (!form) {
+        console.warn("Form 'wf-form-email' not found on this page. This is normal for /pickup and /continue-form.");
+        return; // Exit if the form is not found
+    }
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPagePath = window.location.pathname;
+    console.log("DEBUG DOM: Current page path:", currentPagePath);
+    // --- START: Logic for /pickup and /continue-form pages (unchanged, as they are redirects) ---
+    if (currentPagePath === '/pickup/' || currentPagePath === '/pickup') {
+        console.log("On /pickup page. Checking submission_id from URL.");
+        const urlSubmissionId = urlParams.get('submission_id');
+        console.log("DEBUG: submission_id value read from URL:", urlSubmissionId);
+        if (urlSubmissionId) {
+            sessionStorage.setItem('submissionId', urlSubmissionId);
+            let submissionId = urlSubmissionId;
+            try {
+                callApi('/submission_status', 'GET', { submission_id: submissionId }).then(statusResponse => {
+                    console.log("DEBUG: COMPLETE response from /submission_status:", statusResponse);
+                    if (statusResponse && statusResponse.submission_status) {
+                        if (statusResponse.submission_status === 'awaiting_payment' || statusResponse.submission_status === 'payment_started') {
+                            window.location.href = `/make-payment?submission_id=${submissionId}`;
+                        } else if (statusResponse.submission_status === 'incomplete' || statusResponse.submission_status === 'paid_incomplete') {
+                            window.location.href = `/take-a-questionnaire?submission_id=${submissionId}`;
+                        } else if (statusResponse.submission_status === 'complete') {
+                            window.location.href = `/thank-you`;
+                        } else {
+                            showError("Could not retrieve submission status. Please try again later.");
+                        }
+                    } else {
+                        showError("Could not retrieve submission status. Please try again later.");
+                    }
+                }).catch(error => {
+                    console.error("DEBUG: Error in callApi('/submission_status'):", error);
+                    showError("Could not retrieve submission status. Please try again.");
+                });
+            } catch (error) {
+                console.error("DEBUG: Error starting submission status query:", error);
+                showError("Could not start submission status query. Please try again.");
+            }
+        } else {
+            console.warn("No submission_id found in URL on /pickup page. Redirecting to home page.");
+            window.location.href = '/';
+        }
+        return;
+    }
+    if (currentPagePath === '/continue-form/' || currentPagePath === '/continue-form') {
+        console.log("On /continue-form page. Confirming payment.");
+        const urlSubmissionId = urlParams.get('submission_id');
+        if (urlSubmissionId) {
+            sessionStorage.setItem('submissionId', urlSubmissionId);
+            let submissionId = urlSubmissionId;
+            try {
+                callApi('/complete_telehealth_payment', 'POST', { submission_id: submissionId }).then(async paymentCompleteResponse => {
+                    console.log("DEBUG /continue-form: COMPLETE response from /complete_telehealth_payment:", paymentCompleteResponse);
+                    if (paymentCompleteResponse && paymentCompleteResponse.message === "Payment complete") {
+                        let targetUrl = `/take-a-questionnaire?submission_id=${submissionId}`;
+                        window.location.href = targetUrl;
+                    } else {
+                        showError("Could not confirm payment. Please contact support.");
+                    }
+                }).catch(error => {
+                    console.error("DEBUG /continue-form: ERROR confirming payment:", error);
+                    showError("Error confirming payment. Please try again or contact support.");
+                });
+            } catch (error) {
+                console.error("DEBUG /continue-form: ERROR starting payment confirmation (before fetch):", error);
+                showError("Error starting payment confirmation. Please try again.");
+            }
+        } else {
+            console.warn("DEBUG /continue-form: No submission_id found in URL on /continue-form page.");
+            window.location.href = '/';
+        }
+        return;
+    }
+    // --- END: Logic for /pickup and /continue-form pages ---
+    // --- START: Logic for the initial form page (where Name/Email are entered) ---
+    const steps = form.querySelectorAll(".form-step");
+    let currentStep = 0;
+    const firstNameInput = form.querySelector('input[name="FirstNameInitial"]');
+    const lastNameInput = form.querySelector('input[name="LastNameInitial"]');
+    const emailInput = form.querySelector('input[name="Email"]');
+    // CAMBIO 2: AGREGAR SELECTOR DEL TELÉFONO
+    const phoneInput = form.querySelector('input[name="PhoneNumber"]');
+    let submissionId = urlParams.get('submission_id'); // Only check URL for initial load
+    if (submissionId) {
+        sessionStorage.setItem('submissionId', submissionId); // Store it if present
+        console.log("DEBUG: Initial form - submission_id found in URL:", submissionId);
+        callApi('/submission_status', 'GET', { submission_id: submissionId })
+            .then(statusResponse => {
+                console.log("DEBUG: Initial form - Backend status response for pre-fill:", statusResponse);
+                if (statusResponse && statusResponse.full_name && statusResponse.email) {
+                    const nameParts = statusResponse.full_name.split(' ');
+                    if (firstNameInput) {
+                        firstNameInput.value = nameParts[0] || '';
+                        firstNameInput.setAttribute('readonly', 'true');
+                    }
+                    if (lastNameInput) {
+                        lastNameInput.value = nameParts.slice(1).join(' ') || '';
+                        lastNameInput.setAttribute('readonly', 'true');
+                    }
+                    if (emailInput) {
+                        emailInput.value = statusResponse.email;
+                        emailInput.setAttribute('readonly', 'true');
+                    }
+                    // Agregar pre-llenado de teléfono si existe en la respuesta del backend
+                    if (phoneInput && statusResponse.phone_number) {
+                        phoneInput.value = statusResponse.phone_number;
+                        phoneInput.setAttribute('readonly', 'true');
+                    }
+                } else {
+                    console.log("DEBUG: Initial form - No full_name or email from backend for pre-fill. Fields will be editable.");
+                    // Ensure fields are editable if no data came from backend
+                    if (firstNameInput) { firstNameInput.value = ''; firstNameInput.removeAttribute('readonly'); }
+                    if (lastNameInput) { lastNameInput.value = ''; lastNameInput.removeAttribute('readonly'); }
+                    if (emailInput) { emailInput.value = ''; emailInput.removeAttribute('readonly'); }
+                    if (phoneInput) { phoneInput.value = ''; phoneInput.removeAttribute('readonly'); }
+                }
+            })
+            .catch(error => {
+                console.error("DEBUG: Initial form - Error fetching submission status for pre-fill:", error);
+                // If there's an error fetching, ensure fields are empty and editable
+                if (firstNameInput) { firstNameInput.value = ''; firstNameInput.removeAttribute('readonly'); }
+                if (lastNameInput) { lastNameInput.value = ''; lastNameInput.removeAttribute('readonly'); }
+                if (emailInput) { emailInput.value = ''; emailInput.removeAttribute('readonly'); }
+                if (phoneInput) { phoneInput.value = ''; phoneInput.removeAttribute('readonly'); }
+            })
+            .finally(() => {
+                // Always show the current step after attempting to populate
+                showStep(currentStep);
+            });
+    } else {
+        console.log("DEBUG: Initial form - No submission_id found. Fields will start empty and editable.");
+        // Ensure fields are empty and editable if no submissionId
+        if (firstNameInput) { firstNameInput.value = ''; firstNameInput.removeAttribute('readonly'); }
+        if (lastNameInput) { lastNameInput.value = ''; lastNameInput.removeAttribute('readonly'); }
+        if (emailInput) { emailInput.value = ''; emailInput.removeAttribute('readonly'); }
+        if (phoneInput) { phoneInput.value = ''; phoneInput.removeAttribute('readonly'); }
+        showStep(currentStep); // Show the first step immediately
+    }
+    function hideAllErrors() {
+        if (!form) return;
+        const allErrorAreas = form.querySelectorAll('.form-message-display-area');
+        allErrorAreas.forEach(area => {
+            area.style.display = 'none';
+            area.textContent = '';
+            area.classList.remove('form-message-error');
+            if (errorTimeoutMap.has(area.id)) {
+                clearTimeout(errorTimeoutMap.get(area.id));
+                errorTimeoutMap.delete(area.id);
+            }
+        });
+        // Limpiar errores personalizados del teléfono
+        const customErrors = form.querySelectorAll('.custom-error-message');
+        customErrors.forEach(err => {
+            err.style.display = 'none';
+            err.style.opacity = '0';
+        });
+        const invalidFields = form.querySelectorAll('.invalid-field');
+        invalidFields.forEach(field => {
+            field.classList.remove('invalid-field');
+        });
+    }
+    function showStep(index) {
+        if (steps.length === 0) return;
+        hideAllErrors(); 
+        steps.forEach((step, i) => {
+            if (hasPaidStep && step.classList.contains(PAID_STEP_CLASS)) {
+                step.style.display = "none"; 
+                step.querySelectorAll('input, select, textarea').forEach(input => {
+                    input.setAttribute('disabled', 'true');
+                    input.removeAttribute('required');
+                });
+                return; 
+            }
+            step.style.display = i === index ? "block" : "none";
+        });
+        console.log("Showing step:", currentStep, "of", steps.length - 1);
+        // This section for populating name/email from sessionStorage has been removed from here.
+        // It is now handled in the DOMContentLoaded block based on backend data or new session.
+    }
+    if (form) { 
+        const continueButtons = form.querySelectorAll(".continue-button");
+        continueButtons.forEach((btn, index) => {
+            btn.addEventListener("click", async function (e) {
+                const currentFormStepElement = steps[currentStep];
+                let isValidStep = true;
+                e.preventDefault();
+                hideAllErrors(); 
+                if (currentStep === 4) {
+                    const firstNameInput = currentFormStepElement.querySelector('input[name="FirstNameInitial"]');
+                    const lastNameInput = currentFormStepElement.querySelector('input[name="LastNameInitial"]');
+                    const emailInput = currentFormStepElement.querySelector('input[name="Email"]');
+                    // CAMBIO 3: AGREGAR SELECTOR DEL TELÉFONO
+                    const phoneNumberInput=currentFormStepElement.querySelector('input[name="PhoneNumber"]');
+                    let fullName = '';
+                    if (firstNameInput && lastNameInput) {
+                        const firstName = firstNameInput.value.trim();
+                        const lastName = lastNameInput.value.trim();
+                        fullName = `${firstName} ${lastName}`.trim();
+                        if (firstName.length === 0) {
+                            isValidStep = false;
+                            showError("Please enter your first name.", currentFormStepElement);
+                            firstNameInput.focus();
+                            return; 
+                        }
+                        if (lastName.length === 0) {
+                            isValidStep = false;
+                            showError("Please enter your last name.", currentFormStepElement);
+                            lastNameInput.focus();
+                            return; 
+                        }
+                    } else {
+                        isValidStep = false;
+                        showError("Name input fields not found. Please contact support.", currentFormStepElement);
+                        return;
+                    }
+                    if (emailInput && !emailInput.checkValidity()) {
+                        isValidStep = false;
+                        showError("Please enter a valid email address.", currentFormStepElement);
+                        emailInput.focus();
+                        return;
+                    }
+                    // INICIO DE LA VALIDACIÓN DETALLADA DEL NÚMERO DE TELÉFONO (Código del usuario)
+                    let cleanedPhoneNumber = '';
+                    if(phoneNumberInput && phoneNumberInput.hasAttribute('required') && !phoneNumberInput.disabled && !phoneNumberInput.readOnly){
+                        cleanedPhoneNumber=phoneNumberInput.value.replace(/\D/g,'');
+                        if(cleanedPhoneNumber.length!==10){
+                            isValidStep=false;
+                            phoneNumberInput.classList.add('invalid-field');
+                            const errorMessageDiv=phoneNumberInput.closest('.form-question')?.querySelector('.custom-error-message');
+                            const errorTextSpan = errorMessageDiv?.querySelector('.error-text-content');
+                            if(errorMessageDiv){
+                                errorMessageDiv.style.display='flex';
+                                errorMessageDiv.style.opacity='1';
+                                if(errorTextSpan) errorTextSpan.textContent='Please enter a complete 10-digit phone number.';
+                            }
+                            phoneNumberInput.focus();
+                            return;
+                        }else{
+                            // Limpiar error si es válido
+                            const errorMessageDiv=phoneNumberInput.closest('.form-question')?.querySelector('.custom-error-message');
+                            const errorTextSpan = errorMessageDiv?.querySelector('.error-text-content');
+                            if(errorMessageDiv){
+                                phoneNumberInput.classList.remove('invalid-field');
+                                errorMessageDiv.style.display='none';
+                                if(errorTextSpan) errorTextSpan.textContent = '';
+                            }
+                        }
+                    }
+                    // FIN DE LA VALIDACIÓN DETALLADA DEL NÚMERO DE TELÉFONO
+                    if (!form.reportValidity()) {
+                        isValidStep = false;
+                    }
+                    if (!isValidStep) return;
+                    sessionStorage.setItem('userName', fullName);
+                    sessionStorage.setItem('userEmail', emailInput.value.trim());
+                    // CAMBIO 4: GUARDAR EL TELÉFONO LIMPIO EN sessionStorage
+                    sessionStorage.setItem('userPhoneNumber', cleanedPhoneNumber);
+                } else {
+                    const selectedRadio = currentFormStepElement.querySelector('input[type="radio"]:checked');
+                    if (!selectedRadio) {
+                        showError("Please select an answer.", currentFormStepElement);
+                        isValidStep = false;
+                    }
+                }
+                if (!isValidStep) return;
+                if (currentStep === 3) {
+                    const selectedRadio = currentFormStepElement.querySelector('input[name="question4"]:checked');
+                    let mappedPaymentType;
+                    if (selectedRadio.value === "government") mappedPaymentType = "government";
+                    else if (selectedRadio.value === "yes") mappedPaymentType = "insurance";
+                    else if (selectedRadio.value === "no") mappedPaymentType = "uninsured";
+                    else {
+                        showError("Internal error: Unrecognized payment type. Please select a valid option.", currentFormStepElement);
+                        return;
+                    }
+                    sessionStorage.setItem('paymentType', mappedPaymentType);
+                    currentStep++;
+                    showStep(currentStep);
+                } else if (currentStep === 4) { 
+                    const paymentType = sessionStorage.getItem('paymentType');
+                    if (!paymentType) {
+                        showError("Error: Payment type has not been selected. Please go back and select an option.", currentFormStepElement);
+                        return;
+                    }
+                    try {
+                        const recaptchaToken = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'initial_form_submit' });
+                        console.log("reCAPTCHA v3 Token for Initial Form (submit_preliminary_form):", recaptchaToken); 
+                        const fullName = sessionStorage.getItem('userName'); 
+                        const userEmail = sessionStorage.getItem('userEmail'); 
+                        const userPhone = sessionStorage.getItem('userPhoneNumber'); // Obtener el teléfono de la sesión
+                        // CAMBIO 5: INCLUIR TELÉFONO EN EL REQUEST BODY
+                        const requestBody = {
+                            payment_type: paymentType,
+                            form: {
+                                [backendIdMap.Name]: fullName, 
+                                [backendIdMap.Email]: userEmail,
+                                [backendIdMap.PhoneNumber]: userPhone // Agregar el teléfono
+                            },
+                            recaptcha_token: recaptchaToken 
+                        };
+                        console.log("Final Request Body for initial form:", requestBody); 
+                        let submissionId; 
+                        const preliminaryFormResponse = await callApi('/submit_preliminary_form', 'POST', requestBody, currentFormStepElement); 
+                        if (preliminaryFormResponse && preliminaryFormResponse.submission_id) {
+                            submissionId = preliminaryFormResponse.submission_id;
+                            sessionStorage.setItem('submissionId', submissionId);
+                            await handlePaymentFlow(paymentType, submissionId);
+                        } else {
+                            showError("Could not submit preliminary form. Please try again.", currentFormStepElement);
+                        }
+                    } catch (error) {
+                        console.error("An error occurred during reCAPTCHA execution or initial form submission:", error);
+                        if (!error.message.includes("API call failed")) { 
+                            showError('Security verification error. Please try again.', currentFormStepElement);
+                        }
+                    }
+                } else {
+                    const selectedRadio = currentFormStepElement.querySelector('input[type="radio"]:checked');
+                    if (selectedRadio.value === "yes") {
+                        currentStep++;
+                        showStep(currentStep);
+                    } else {
+                        window.location.href = "/not-applicable";
+                    }
+                }
+            });
+        });
+        const goBackButtons = form.querySelectorAll(".go-back");
+        goBackButtons.forEach((btn) => {
+            btn.addEventListener("click", function (e) {
+                e.preventDefault();
+                if (currentStep > 0) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+        });
+    }
+    // CAMBIO 6: AGREGAR LÓGICA DE FORMATO DE TELÉFONO (xxx-xxx-xxxx)
+    function applyPhoneNumberFormatting() {
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, ''); // Remover todo lo que no sea dígito
+                let formattedValue = '';
+                if (value.length > 0) formattedValue = value.substring(0, 3);
+                if (value.length >= 4) formattedValue += '-' + value.substring(3, 6);
+                if (value.length >= 7) formattedValue += '-' + value.substring(6, 10);
+                e.target.value = formattedValue;
+            });
+            // Asegurar que solo se permitan 10 dígitos + 2 guiones = 12 caracteres.
+            phoneInput.setAttribute('maxlength', '12'); 
+        }
+    }
+    applyPhoneNumberFormatting();
+    // FIN CAMBIO 6
+});
+</script>
+</body>
+</html>
